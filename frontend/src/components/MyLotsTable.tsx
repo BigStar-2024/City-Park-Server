@@ -267,7 +267,7 @@ export default function MyLotsTable() {
 
     return (
         <div className="p-2 bg-white rounded-lg w-full">
-            <DataTable paginator rows={5} pageLinkSize={2} rowsPerPageOptions={[5, 10, 25, 50]} 
+            <DataTable paginator rows={25} pageLinkSize={2} rowsPerPageOptions={[5, 10, 25, 50]} 
                 value={dataArr} tableStyle={{ minWidth: '50rem' }} pt={{
                     thead: { className: "text-[14px]" },
                     paginator: {

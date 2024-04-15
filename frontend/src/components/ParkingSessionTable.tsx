@@ -213,7 +213,7 @@ export default function ParkingSessionTable({ siteCode }: { siteCode?: string })
                     </>
                 } sortable style={{ width: '15%' }}></Column>
             </DataTable> */}
-            <DataTable paginator rows={5} pageLinkSize={2} rowsPerPageOptions={[5, 10, 25, 50]} 
+            <DataTable paginator rows={25} pageLinkSize={2} rowsPerPageOptions={[5, 10, 25, 50]} 
                 value={dataArr} tableStyle={{ minWidth: '50rem' }} pt={{
                     thead: { className: "text-[14px]" },
                     paginator: {
