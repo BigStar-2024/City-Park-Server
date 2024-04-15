@@ -281,8 +281,16 @@ export default function MyLotsTable() {
                 <Column field="plateNumber" header="Plate number" sortable style={{ width: '10%' }}></Column>
                 <Column field="plate" header="" body={plateNumberBody} style={{ width: '10%' }}></Column>
                 <Column field="vehicle" header="Vehicle" body={vehicleBody} sortable style={{ width: '20%' }}></Column>
-                <Column header="Entry Time" body={(item: ConsolidatedRecord) => item.entryTime} sortable style={{ width: '15%' }}></Column>
-                <Column header="Exit Time" body={(item: ConsolidatedRecord) => item.exitTime} sortable style={{ width: '15%' }}></Column>
+                <Column header="Entry Time" body={(item: ConsolidatedRecord) =>
+                    <>
+                        {<span>{item.entryTime ? new Date(item.entryTime).toLocaleString("en-us") : ""}</span>}
+                    </>
+                } sortable style={{ width: '15%' }}></Column>
+                <Column header="Exit Time" body={(item: ConsolidatedRecord) =>
+                    <>
+                        {<span>{item.exitTime ? new Date(item.exitTime).toLocaleString("en-us") : ""}</span>}
+                    </>
+                } sortable style={{ width: '15%' }}></Column>
             </DataTable>
         </div>
     );
