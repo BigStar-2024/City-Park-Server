@@ -244,8 +244,25 @@ export default function MyLotsTable() {
             <img src={`${import.meta.env.VITE_API_BACKEND_URL}public/${product.plate}`} />
         </HtmlTooltip>
     );
+    const vehicleBody = (product: DataItem) => {
+        return <>
 
-    console.log(dataArr);
+            <HtmlTooltip
+                title={
+                    <>
+                        <div className=''>
+                            <span className="text-xl text-black">(Blue Toyota)</span>
+                            {/* TODO: Remove */}
+                            <img src={`${import.meta.env.VITE_API_BACKEND_URL}public/${product.vehicle}`} />
+                        </div>
+                    </>
+                }
+            >
+                <span className={`underline text-blue-500 cursor-pointer`}> (Blue Toyota) </span>
+            </HtmlTooltip>
+        </>;
+    };
+
 
 
     return (
@@ -263,6 +280,7 @@ export default function MyLotsTable() {
                 <Column field="camera" header="Camera" sortable style={{ width: '10%' }}></Column>
                 <Column field="plateNumber" header="Plate number" sortable style={{ width: '10%' }}></Column>
                 <Column field="plate" header="" body={plateNumberBody} style={{ width: '10%' }}></Column>
+                <Column field="vehicle" header="Vehicle" body={vehicleBody} sortable style={{ width: '20%' }}></Column>
                 <Column header="Entry Time" body={(item: ConsolidatedRecord) => item.entryTime} sortable style={{ width: '15%' }}></Column>
                 <Column header="Exit Time" body={(item: ConsolidatedRecord) => item.exitTime} sortable style={{ width: '15%' }}></Column>
             </DataTable>
