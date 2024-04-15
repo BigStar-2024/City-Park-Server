@@ -1,0 +1,17 @@
+button.p-button {
+    background-color: #3b82f6;
+    padding: 8px 16px;
+    color: white;
+    margin: 2px;
+}
+button.p-button:hover{
+    opacity: 0.8;
+}
+button.p-button.p-danger {
+    background-color: #f63b3b;
+}
+input.p-dropdown-filter{
+    border:1px solid black;
+    border-radius: 6px;
+    padding: 4px 8px;
+}

@@ -1,0 +1,12 @@
+{
+  "name": "city-park-lot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm run start"
+  },
+  "author": "",
+  "license": "ISC"
+}

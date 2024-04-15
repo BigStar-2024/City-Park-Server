@@ -1,0 +1,10 @@
+node_modules
+.env
+public/*
+public/img/*
+!public/.gitkeep
+!public/img
+!public/user.png
+!public/img/.gitkeep
+dist
+firebase/serviceAccountKey.json
