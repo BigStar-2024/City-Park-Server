@@ -1,7 +1,6 @@
 import ChartTest from "../components/ChartTest"
 import MyLotsTable from "../components/MyLotsTable"
 import { useAppSelector } from '../redux/hooks'
-import { passion_number } from "../redux/slice/payReducer";
 
 
 const MonthlyPortal = ({ month }: { month: string }) => {
