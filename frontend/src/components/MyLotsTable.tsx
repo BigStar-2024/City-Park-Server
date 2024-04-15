@@ -217,7 +217,7 @@ export default function MyLotsTable() {
     
         // Flatten the records and sort by entry time, ensuring entryTime is defined
         let allRecords = Array.from(recordMap.values()).flat();
-        allRecords.sort((a, b) => new Date(a.entryTime!).getTime() - new Date(b.entryTime!).getTime());
+        allRecords.sort((a, b) => new Date(b.entryTime!).getTime() - new Date(a.entryTime!).getTime());
     
         return allRecords;
     };
