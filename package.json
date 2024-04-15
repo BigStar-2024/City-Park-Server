@@ -8,5 +8,9 @@
     "start": "cd backend && npm run start"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.3",
+    "react-redux": "^9.1.1"
+  }
 }

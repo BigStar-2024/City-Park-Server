@@ -127,8 +127,10 @@ import 'primeicons/primeicons.css';
 import axios from 'axios';
 import { DataItem, ConsolidatedRecord } from '../types';
 import HtmlTooltip from './HtmlToolTip';
-
+import { useAppDispatch } from '../redux/hooks'
+import { passion_number} from "../redux/slice/payReducer";
 export default function MyLotsTable() {
+    const dispatch = useAppDispatch();
     const [dataArr, setDataArr] = useState<ConsolidatedRecord[]>([]);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     // const [autoUpdate, setAutoUpdate] = useState(true);
@@ -229,6 +231,7 @@ export default function MyLotsTable() {
         const { data } = await axios.get<DataItem[]>(`/data`);
         const consolidatedData = consolidateData(data);
         setDataArr(consolidatedData);
+        dispatch(passion_number(Number(consolidateData.length)));
         // if (autoUpdate) {
             timeoutRef.current = setTimeout(fetchData, 30000);
         // }
