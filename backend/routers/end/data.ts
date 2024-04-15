@@ -13,7 +13,6 @@ dataRouter
             list = await dataModel.find().sort({ time: -1 });
         } else {
             const lots = await lotModel.find({ owners: req.decodedToken?.email });
-            console.log( "lots => ", lots)
             list = await dataModel.find({ lot: { $in: lots.map(lot => lot.siteCode) } }).sort({ time: -1 });
         }
         res.status(200).json(list);
