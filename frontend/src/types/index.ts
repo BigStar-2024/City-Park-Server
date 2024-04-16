@@ -52,7 +52,8 @@ export interface ConsolidatedRecord {
     camera: string;
     plateNumber: string;
     plate: string;
-    vehicle: string;
+    vehicle1: string;
+    vehicle2?: string;
     direction: string;
     entryTime?: string;
     exitTime?: string;

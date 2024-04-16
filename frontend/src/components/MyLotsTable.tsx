@@ -32,7 +32,8 @@ export default function MyLotsTable() {
                     camera: item.camera, // Initial camera from the entry event
                     plateNumber: item.plateNumber,
                     plate: item.plate, // Initial plate from the entry event
-                    vehicle: item.vehicle, // Initial vehicle from the entry event
+                    vehicle1: item.vehicle, // Initial vehicle from the entry event
+                    vehicle2: undefined, // Initial vehicle from the entry event
                     direction: item.direction,
                     entryTime: item.time!, // Asserting item.time is defined
                     exitTime: undefined,
@@ -45,7 +46,7 @@ export default function MyLotsTable() {
                     lastEntry._id = item._id; // Update _id to exit event's _id
                     lastEntry.camera = item.camera; // Update camera to exit event's camera
                     lastEntry.plate = item.plate; // Update plate to exit event's plate
-                    lastEntry.vehicle = item.vehicle; // Update vehicle to exit event's vehicle
+                    lastEntry.vehicle2 = item.vehicle; // Update vehicle to exit event's vehicle
                 }
             }
             recordMap.set(item.plateNumber, records);
@@ -104,25 +105,30 @@ export default function MyLotsTable() {
     
 
     const plateNumberBody = (product: ConsolidatedRecord) => (
-        <HtmlTooltip title={<div><span className="text-xl text-black">(Blue Toyota)</span><img src={`${import.meta.env.VITE_API_BACKEND_URL}public/${product.vehicle}`} /></div>}>
+        <HtmlTooltip title={<div><span className="text-xl text-black">(Plate)</span><img src={`${import.meta.env.VITE_API_BACKEND_URL}public/${product.plate}`} /></div>}>
             <img src={`${import.meta.env.VITE_API_BACKEND_URL}public/${product.plate}`} />
         </HtmlTooltip>
     );
-    const vehicleBody = (product: DataItem) => {
+    const vehicleBody = (product: ConsolidatedRecord) => {
         return <>
 
             <HtmlTooltip
                 title={
                     <>
                         <div className=''>
-                            <span className="text-xl text-black">(Blue Toyota)</span>
+                            <span className="text-xl text-black">(Entrance)</span>
                             {/* TODO: Remove */}
-                            <img src={`${import.meta.env.VITE_API_BACKEND_URL}public/${product.vehicle}`} />
+                            <img src={`${import.meta.env.VITE_API_BACKEND_URL}public/${product.vehicle1}`} />
+                        </div>
+                        <div className=''>
+                            <span className="text-xl text-black">(Exit)</span>
+                            {/* TODO: Remove */}
+                            <img src={`${import.meta.env.VITE_API_BACKEND_URL}public/${product.vehicle2}`} />
                         </div>
                     </>
                 }
             >
-                <span className={`underline text-blue-500 cursor-pointer`}> (Blue Toyota) </span>
+                <span className={`underline text-blue-500 cursor-pointer`}> (Entrance Exit) </span>
             </HtmlTooltip>
         </>;
     };
