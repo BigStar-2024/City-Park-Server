@@ -1,20 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface passionState {
-  passion_number: number;
+  passion_number: Array<Number>;
 }
 
 const initialState: passionState = {
-  passion_number: 0
+  passion_number: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 };
 
 export const payReducer = createSlice({
-  name: "city-park",
+  name: "passion_number",
   initialState,
   reducers: {
-    
     passion_number: (state, action: PayloadAction<number>) => {
-      state.passion_number = action.payload;
+      state.passion_number = [action.payload]; // Wrap action.payload in an array
     },
   },
 });

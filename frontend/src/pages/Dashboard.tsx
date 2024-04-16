@@ -1,11 +1,15 @@
 import ChartTest from "../components/ChartTest"
 import MyLotsTable from "../components/MyLotsTable" 
+// import { useAppSelector } from "../redux/hooks";
 
 interface Props {
     month: string;
 }
+// const parking_session = useAppSelector(state => state.pay.passion_number);
+// console.log(parking_session);
 
 const MonthlyPortal: React.FC <Props> = ({ month }) => { 
+
     return (
         <div className="flex flex-col w-full min-w-[200px] gap-2 bg-white p-4 rounded-md">
             <div className="flex items-center gap-6">
