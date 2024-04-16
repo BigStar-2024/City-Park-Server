@@ -1,10 +1,11 @@
 import ChartTest from "../components/ChartTest"
-import MyLotsTable from "../components/MyLotsTable"
-import { useAppSelector } from '../redux/hooks'
+import MyLotsTable from "../components/MyLotsTable" 
 
+interface Props {
+    month: string;
+}
 
-const MonthlyPortal = ({ month }: { month: string }) => {
-    const passionNumber = useAppSelector(state => state.pay.passion_number);
+const MonthlyPortal: React.FC <Props> = ({ month }) => { 
     return (
         <div className="flex flex-col w-full min-w-[200px] gap-2 bg-white p-4 rounded-md">
             <div className="flex items-center gap-6">
@@ -13,7 +14,7 @@ const MonthlyPortal = ({ month }: { month: string }) => {
             </div>
             <div className="flex items-center gap-2">
                 <svg className="w-5 h-5 fill-[#222]"><use href="#svg-car" /></svg>
-                <span className="text-xs">Parking Sessions: <strong>{passionNumber}</strong></span>
+                <span className="text-xs">Parking Sessions: <strong>12324</strong></span>
             </div>
             <div className="flex items-center gap-2">
                 <svg className="w-5 h-5 p-[2px] fill-[#222]"><use href="#svg-exclamation" /></svg>

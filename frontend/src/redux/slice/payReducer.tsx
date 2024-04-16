@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface payAmountState {
+interface passionState {
   passion_number: number;
 }
 
-const initialState: payAmountState = {
+const initialState: passionState = {
   passion_number: 0
 };
 
 export const payReducer = createSlice({
-  name: "payAmount",
+  name: "city-park",
   initialState,
   reducers: {
     
-    passion_number:(state, action: PayloadAction<number>) => {
+    passion_number: (state, action: PayloadAction<number>) => {
       state.passion_number = action.payload;
     },
   },
