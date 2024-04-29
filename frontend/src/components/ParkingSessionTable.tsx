@@ -176,37 +176,7 @@ export default function ParkingSessionTable({ siteCode }: { siteCode?: string })
                     <div className='px-3 py-1 border border-[#ccc] rounded-md text-sm'>5115 Records</div>
                 </div>
             </div>
-            {/* <DataTable
-                paginator rows={5} pageLinkSize={2} rowsPerPageOptions={[5, 10, 25, 50]} 
-                value={dataArr} tableStyle={{ minWidth: '50rem' }} pt={{
-                    thead: { className: "text-[14px]" },
-                    paginator: {
-                        pageButton: ({ context }: { context: any }) => ({
-                            className: context.active ? 'bg-blue-500 text-white text-[12px]' : undefined,
-                        }),
-                    },
-                }} >
-                <Column field="lot" header="Lot name" sortable style={{ width: '10%' }}></Column>
-                <Column field="camera" header="Camera" sortable style={{ width: '10%' }}></Column>
-                <Column field="plateNumber" header="Plate number" sortable style={{ width: '10%' }}></Column>
-                <Column field="plate" header="" body={plateNumberBody} style={{ width: '10%' }}></Column>
-                <Column field="vehicle" header="Vehicle" body={vehicleBody} sortable style={{ width: '20%' }}></Column>
-                <Column field="direction" header="Direction" body={
-                    (item: DataItem) => <span className={`pi ${item.direction.trim().toLowerCase() === "enter" ? "pi-arrow-up-right" : "pi-arrow-down-left"}`}></span>
-                } sortable style={{ width: '10%' }}></Column>
-                <Column header="Entry" body={(item: DataItem) =>
-                    <>
-                        {item.direction.trim().toLowerCase() === "enter" &&
-                            <span>{new Date(item.time).toLocaleString("en-us")}</span>}
-                    </>
-                } sortable style={{ width: '15%' }}></Column>
-                <Column header="Exit" body={(item: DataItem) =>
-                    <>
-                        {item.direction.trim().toLowerCase() !== "enter" &&
-                            <span>{new Date(item.time).toLocaleString("en-us")}</span>}
-                    </>
-                } sortable style={{ width: '15%' }}></Column>
-            </DataTable> */}
+            
             <DataTable paginator rows={25} pageLinkSize={2} rowsPerPageOptions={[5, 10, 25, 50]} 
                 value={dataArr} tableStyle={{ minWidth: '50rem' }} pt={{
                     thead: { className: "text-[14px]" },
