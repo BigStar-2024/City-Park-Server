@@ -27,13 +27,13 @@ export default function ParkingSessionTable({ siteCode }: { siteCode?: string })
 
     // const consolidateData = (rawData: DataItem[]): ConsolidatedRecord[] => {
     //     const recordMap = new Map<string, ConsolidatedRecord[]>();
-    
+
     //     // Sort to ensure chronological order for correct processing
     //     rawData.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
-    
+
     //     rawData.forEach(item => {
     //         if (!item.time) return; // Skip processing if time is undefined
-    
+
     //         let records = recordMap.get(item.plateNumber) || [];
     //         if (item.direction === "ENTER") {
     //             records.push({
@@ -60,25 +60,25 @@ export default function ParkingSessionTable({ siteCode }: { siteCode?: string })
     //         }
     //         recordMap.set(item.plateNumber, records);
     //     });
-    
+
     //     // Flatten the records and filter to only include completed pairs with exit times
     //     let allRecords = Array.from(recordMap.values()).flat().filter(rec => rec.exitTime);
-    
+
     //     // Sort by exit time, asserting exitTime is defined
     //     allRecords.sort((a, b) => new Date(a.exitTime!).getTime() - new Date(b.exitTime!).getTime());
-    
+
     //     return allRecords;
     // };
 
     const consolidateData = (rawData: DataItem[]): ConsolidatedRecord[] => {
         const recordMap = new Map<string, ConsolidatedRecord[]>();
-    
+
         // Ensure all data items have defined times before processing
         const filteredData = rawData.filter(item => item.time !== undefined);
-    
+
         // Sort to ensure chronological order for correct processing
         filteredData.sort((a, b) => new Date(a.time!).getTime() - new Date(b.time!).getTime());
-    
+
         filteredData.forEach(item => {
             let records = recordMap.get(item.plateNumber) || [];
             if (item.direction === "ENTER") {
@@ -106,23 +106,23 @@ export default function ParkingSessionTable({ siteCode }: { siteCode?: string })
             }
             recordMap.set(item.plateNumber, records);
         });
-    
+
         // Flatten the records and sort by entry time, ensuring entryTime is defined
         let allRecords = Array.from(recordMap.values()).flat();
         allRecords.sort((a, b) => new Date(a.entryTime!).getTime() - new Date(b.entryTime!).getTime());
-    
+
         return allRecords;
     };
-    
-    
-    
-    
+
+
+
+
     const fetchData = async () => {
         const { data } = await axios.get(`/data${siteCode ? "/site-code/" + siteCode : ""}`)
         const consolidatedData = consolidateData(data);
         setDataArr(consolidatedData);
         // if (autoUpdate) {
-            timeoutRef.current = setTimeout(fetchData, 30000);
+        timeoutRef.current = setTimeout(fetchData, 30000);
         // }
     };
 
@@ -171,7 +171,9 @@ export default function ParkingSessionTable({ siteCode }: { siteCode?: string })
             <h1 className='font-bold p-2 text-lg'>Sessions & Violations</h1>
             <div className='flex max-md:flex-col justify-between items-center'>
                 <div className='flex p-2 gap-2'>
-                    <Button color='green'>Sessions</Button>
+                    {user?.customClaims.admin && <Button color='pink'>LPR Sessions</Button>}
+                    {user?.customClaims.admin && <Button color='teal'>Paid Sessions</Button>}
+                    <Button color='green'>Non-Violation</Button>
                     <Button color='rose'>Violations</Button>
                     {user?.customClaims.admin && <Button color='blue'>Error</Button>}
                 </div>
@@ -213,7 +215,7 @@ export default function ParkingSessionTable({ siteCode }: { siteCode?: string })
                     </>
                 } sortable style={{ width: '15%' }}></Column>
             </DataTable> */}
-            <DataTable paginator rows={5} pageLinkSize={2} rowsPerPageOptions={[5, 10, 25, 50]} 
+            <DataTable paginator rows={5} pageLinkSize={2} rowsPerPageOptions={[5, 10, 25, 50]}
                 value={dataArr} tableStyle={{ minWidth: '50rem' }} pt={{
                     thead: { className: "text-[14px]" },
                     paginator: {
