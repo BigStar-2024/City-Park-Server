@@ -18,6 +18,14 @@ import ParkingSessionTable from '../components/ParkingSessionTable';
 import { useAuthorize } from '../store/store';
 import { MultiSelect } from 'primereact/multiselect';
 import MyCalendar from '../components/MyCalendar';
+import { Dropdown } from 'primereact/dropdown';
+
+
+interface PayingApp {
+    name: string;
+    url: string;
+}
+
 const Lot = ({ lot, fetchLot }: { lot: LotType, fetchLot: () => Promise<void> }) => {
     const { user } = useAuthorize()
     const [visible, setVisible] = useState(false);
@@ -54,15 +62,18 @@ const Lot = ({ lot, fetchLot }: { lot: LotType, fetchLot: () => Promise<void> })
                             <div className='absolute left-0 w-full overflow-x-auto p-2 pl-[60px] text-xs text-nowrap'>{`url=${import.meta.env.VITE_API_SENDER_URL}&token=${lot.token}`}</div>
                         </div>
                     </div>
-                    <div className='flex justify-between max-lg:flex-col gap-2 items-center pb-4'>
+                    <div>
+                    <div className='flex justify-between max-lg:flex-col gap-2 items-center pb-4 '>
 
                         <div className='flex w-full items-center gap-1'>
                             <span className='max-lg:w-[150px]'>URL:</span>
-                            <i className='w-full border border-black p-2 rounded-md min-w-[200px] block'>{lot.url}</i></div>
+                            <i className='w-full border border-black p-2 rounded-md min-w-[200px] overflow-x-auto block'>{lot.url}</i></div>
 
+                    </div>
+                    <div className='mb-2'>
                         {
                             user?.customClaims.admin &&
-                            <PrimeButton className='w-full text-center justify-center' onClick={() => {
+                            <PrimeButton className='w-full min-w-[200px] text-center justify-center' onClick={() => {
                                 confirmDialog({
                                     message: 'Do you want to delete this record?',
                                     header: 'Delete Confirmation',
@@ -74,6 +85,7 @@ const Lot = ({ lot, fetchLot }: { lot: LotType, fetchLot: () => Promise<void> })
                                 });
                             }}>Remove this lot</PrimeButton>
                         }
+                    </div>
                     </div>
                     <Accordion activeIndex={0}>
                         <AccordionTab header="Parking Sessions">
@@ -162,6 +174,12 @@ const MyLots = () => {
     }
     const [lotOwners, setLotOwners] = useState<UserType[]>()
 
+    const [selectedPayingApp, setSelectedApp] = useState<PayingApp | null>(null);
+    const payingApps: PayingApp[] = [
+        { name: 'Flowbird', url: 'https://weboffice.us.flowbird.io/cwo2/images/favicon.ico' },
+        { name: 'Citypark PayingApp', url: 'https://i.ibb.co/HhCHXCY/fav-bg.jpg' }
+    ];
+
     return (
         <>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
@@ -189,7 +207,7 @@ const MyLots = () => {
                         <input onChange={(e) => setSiteCode(e.target.value.trim())} value={siteCode} className='col-span-3 w-full outline-none px-4 py-1 border border-black rounded-md placeholder:italic' placeholder='FL 101' />
                     </div>
                     <div className='flex items-center max-md:flex-col max-md:items-start'>
-                        <span className='w-40'>URL for UI</span>
+                        <span className='w-40 mb-2'>URL for UI</span>
                         <input onChange={(e) => setUrl(e.target.value)} value={url} className='col-span-3 w-full outline-none px-4 py-1 border border-black rounded-md placeholder:italic' placeholder='https://...' />
                     </div>
                     <div >
@@ -209,6 +227,31 @@ const MyLots = () => {
                                 );
                             }} className="w-full md:w-20rem text-xs" display="chip" />
                     </div>
+                    <div >
+                        <span className='w-40'>Paying App</span>
+                        <Dropdown
+                            value={selectedPayingApp} // Update selected value
+                            options={payingApps} // Update options
+                            filter
+                            onChange={(e) => setSelectedApp(e.value)} // Update onChange function
+                            optionLabel="name" // Update optionLabel to display the name of the paying app
+                            placeholder="Select a Paying App"
+                            pt={{
+                                root: { className: 'border border-black' },
+                                // checkbox: { className: "border border-black" },
+                            }}
+                            itemTemplate={(option) => (
+                                <div className="flex items-center gap-1">
+                                    <img className="rounded-full w-10 h-10 min-w-10 min-h-10 float-right" src={option.url} />
+                                    <div>{option.name}</div>
+                                </div>
+                            )}
+                            className="w-full md:w-20rem text-xs"
+                        // display="chip"
+                        // maxSelectedLabels={1}
+                        />
+                    </div>
+
                     <UploadImage setFile={setFile} />
                     <div className='col-start-2 col-span-2'>
                         {uploadProgress > 0 && <ProgressLinearWithValueLabel setVar={{ uploadProgress }} />}

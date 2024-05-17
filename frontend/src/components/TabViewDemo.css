@@ -1,0 +1,33 @@
+/* TabViewDemo.css */
+
+.tabview-demo .tabview-header-icon i, .tabview-demo .tabview-header-icon span {
+    vertical-align: middle;
+}
+
+.tabview-demo .tabview-header-icon span {
+    margin: 0 .5rem;
+}
+
+.tabview-demo .p-tabview p {
+    line-height: 1.5;
+    margin: 0;
+}
+
+.p-tabview-nav-link {
+    background-color: rgb(20 184 166 / var(--tw-bg-opacity));
+    color: white;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.p-tabview-nav-link:hover {
+    background-color: plum; 
+}
+
+.p-tabview-nav-link:active {
+    background-color: palevioletred; 
+}
+
+.p-unselectable-text {
+    margin: 0px 4px;
+}
